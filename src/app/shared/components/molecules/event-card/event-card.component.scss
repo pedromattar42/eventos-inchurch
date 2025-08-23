@@ -1,0 +1,240 @@
+.event-card {
+  width: 100%;
+  max-width: 380px;
+  height: 360px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 575px) {
+    height: 320px;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  &:focus-within {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(139, 195, 74, 0.5);
+  }
+
+  .status-badge {
+    position: absolute;
+    top: 11.25rem;
+    left: 0.75rem;
+    background: white;
+    color: var(--p-slate-700);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .event-image {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+
+    @media (max-width: 575px) {
+      height: 160px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .placeholder-image {
+      width: 100%;
+      height: 100%;
+      background-color: var(--p-gray-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      i {
+        font-size: 48px;
+        color: var(--p-gray-400);
+
+        @media (max-width: 575px) {
+          font-size: 32px;
+        }
+      }
+
+      .placeholder-text {
+        color: white;
+        font-size: 48px;
+        font-weight: 300;
+        letter-spacing: 8px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+
+  .event-content {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .event-title {
+      margin: 0 0 16px 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: #2c3e50;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 50px;
+      flex-shrink: 0;
+    }
+
+    .event-meta {
+      margin-top: auto;
+
+      .published-label {
+        color: var(--p-lime-500);
+        font-size: 18px;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 2px;
+      }
+
+      .published-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .published-date {
+          color: var(--p-gray-400);
+          font-size: 16px;
+          font-weight: 600;
+        }
+
+        .action-buttons {
+          display: flex;
+          gap: 1px;
+
+          button {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 6px;
+            background: transparent;
+            color: #95a5a6;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            font-size: 14px;
+
+            &:hover {
+              background: #f8f9fa;
+              color: #2c3e50;
+              transform: scale(1.1);
+            }
+
+            &.edit-btn:hover {
+              color: #3498db;
+            }
+
+            &.delete-btn:hover {
+              color: #e74c3c;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .event-card {
+    width: 100%;
+    max-width: 380px;
+    height: 340px; // Altura ligeiramente menor em mobile
+
+    .event-content {
+      padding: 16px;
+
+      .event-title {
+        font-size: 16px;
+        height: 44px; // Altura ajustada para mobile
+      }
+
+      .event-meta {
+        .published-label {
+          font-size: 16px;
+        }
+
+        .published-info {
+          .published-date {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .event-card {
+    height: 320px; // Altura ainda menor para telas muito pequenas
+
+    .event-image {
+      height: 180px; // Imagem menor
+    }
+
+    .status-badge {
+      top: 160px; // Ajustar posição do badge
+      font-size: 11px;
+      padding: 6px 10px;
+    }
+
+    .event-content {
+      padding: 14px;
+
+      .event-title {
+        font-size: 15px;
+        height: 40px;
+        margin-bottom: 12px;
+      }
+
+      .event-meta {
+        .published-label {
+          font-size: 15px;
+        }
+
+        .published-info {
+          .published-date {
+            font-size: 13px;
+          }
+
+          .action-buttons button {
+            width: 28px;
+            height: 28px;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}
