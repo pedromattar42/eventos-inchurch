@@ -15,7 +15,6 @@ export interface UserPreferences {
 export class UserPreferencesService {
   private readonly STORAGE_KEY = 'inchurch-user-preferences';
   
-  // Default preferences - SEMPRE 8 eventos por página
   private readonly DEFAULT_PREFERENCES: UserPreferences = {
     view: {
       isListView: false,
@@ -23,10 +22,8 @@ export class UserPreferencesService {
     }
   };
 
-  // Private signals for preferences
   private _preferences = signal<UserPreferences>(this.DEFAULT_PREFERENCES);
 
-  // Public computed signals
   readonly preferences = computed(() => this._preferences());
   readonly viewPreferences = computed(() => this._preferences().view);
   readonly isListView = computed(() => this._preferences().view.isListView);
@@ -46,13 +43,13 @@ export class UserPreferencesService {
       if (saved) {
         const parsed = JSON.parse(saved);
 
-        // Valida e mescla com as preferências padrão - FORÇA 8 eventos por página
         const preferences: UserPreferences = {
           view: {
             isListView: typeof parsed.view?.isListView === 'boolean'
               ? parsed.view.isListView
               : this.DEFAULT_PREFERENCES.view.isListView,
-            rows: 8 // SEMPRE 8 eventos por página
+
+            rows: 8 
           }
         };
 
@@ -61,7 +58,6 @@ export class UserPreferencesService {
         this._preferences.set(this.DEFAULT_PREFERENCES);
       }
     } catch (error) {
-      console.warn('Erro ao carregar preferências do usuário:', error);
       this._preferences.set(this.DEFAULT_PREFERENCES);
     }
   }
@@ -73,9 +69,7 @@ export class UserPreferencesService {
     try {
       const preferences = this._preferences();
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(preferences));
-    } catch (error) {
-      console.warn('Erro ao salvar preferências do usuário:', error);
-    }
+    } catch (error) {}
   }
 
   /**
@@ -137,30 +131,5 @@ export class UserPreferencesService {
    */
   exportPreferences(): UserPreferences {
     return { ...this._preferences() };
-  }
-
-  /**
-   * Importa preferências (útil para restaurar backup)
-   */
-  importPreferences(preferences: UserPreferences): void {
-    try {
-      // Valida a estrutura antes de importar
-      if (preferences && typeof preferences === 'object') {
-        this._preferences.set({
-          view: {
-            isListView: typeof preferences.view?.isListView === 'boolean' 
-              ? preferences.view.isListView 
-              : this.DEFAULT_PREFERENCES.view.isListView,
-            rows: typeof preferences.view?.rows === 'number' && preferences.view.rows > 0
-              ? preferences.view.rows
-              : this.DEFAULT_PREFERENCES.view.rows
-          }
-        });
-        
-        this.savePreferences();
-      }
-    } catch (error) {
-      console.warn('Erro ao importar preferências:', error);
-    }
   }
 }

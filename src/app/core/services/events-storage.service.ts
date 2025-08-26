@@ -8,10 +8,10 @@ export class EventsStorageService {
   // Signal privado para armazenar os eventos
   private _events = signal<EventData[]>([]);
 
-  // Signal público readonly para acessar os eventos
+  // Signal público para acessar os eventos
   readonly events = computed(() => this._events());
 
-  // Signal para controlar loading state
+  // Signal para controlar o loading
   private _isLoading = signal<boolean>(false);
   readonly isLoading = computed(() => this._isLoading());
 
@@ -29,38 +29,49 @@ export class EventsStorageService {
     }
 
     return events.filter(event =>
-      event.title.toLowerCase().includes(search) ||
-      event.description.toLowerCase().includes(search)
+      event.title.toLowerCase().includes(search)
     );
   });
-
-  // Métodos para manipular o storage
   
   /**
-   * Define todos os eventos (usado quando carrega da API)
+   * Define todos os eventos (usado quando carrega do JSON-SERVER)
    */
   setEvents(events: EventData[]): void {
     this._events.set([...events]);
   }
 
   /**
-   * Adiciona um novo evento ao início da lista
+   * Adiciona um novo evento na lista
    */
   addEvent(event: EventData): void {
-    this._events.update(currentEvents => [event, ...currentEvents]);
+    this._events.update(currentEvents => {
+      // Evita duplicatas
+      const exists = currentEvents.some(e =>
+        e.id === event.id || e.id.toString() === event.id.toString()
+      );
+      if (exists) return currentEvents;
+
+      return [event, ...currentEvents];
+    });
   }
 
   /**
    * Atualiza um evento existente
    */
   updateEvent(updatedEvent: EventData): void {
-    this._events.update(currentEvents =>
-      currentEvents.map(event =>
-        (event.id === updatedEvent.id || event.id.toString() === updatedEvent.id.toString())
-          ? updatedEvent
-          : event
-      )
-    );
+    this._events.update(currentEvents => {
+      let hasChanged = false;
+      const newEvents = currentEvents.map(event => {
+        if (event.id === updatedEvent.id || event.id.toString() === updatedEvent.id.toString()) {
+          hasChanged = true;
+          return updatedEvent;
+        }
+        return event;
+      });
+
+      // Só retorna novo array se houve mudança
+      return hasChanged ? newEvents : currentEvents;
+    });
   }
 
   /**
