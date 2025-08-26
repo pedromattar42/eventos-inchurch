@@ -58,7 +58,7 @@ cd eventos-inchurch
 
 ### **2. Instalação de Dependências**
 ```bash
-npm install
+npm install --legacy-peer-deps
 ```
 
 ### **3. Iniciar a API Fake**
