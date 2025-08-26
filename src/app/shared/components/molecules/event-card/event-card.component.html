@@ -1,0 +1,49 @@
+<div class="event-card">
+  <div class="event-image">
+    @if (event().imageUrl) {
+    <img [src]="event().imageUrl" [alt]="event().title" />
+    } @else {
+    <div class="placeholder-image">
+      <i class="pi pi-image"></i>
+    </div>
+    }
+  </div>
+
+  <div class="event-content">
+    <div class="status-badge">
+      {{
+        event().hasActiveTickets
+          ? "Com ingressos ativos"
+          : "Sem ingressos ativos"
+      }}
+    </div>
+    <h3 class="event-title">{{ event().title }}</h3>
+
+    <div class="event-meta">
+      <span class="published-label">Publicado em</span>
+      <div class="published-info">
+        <span class="published-date">{{
+          formatDate(event().publishedDate)
+        }}</span>
+        <div class="action-buttons">
+          <button
+            class="edit-btn"
+            type="button"
+            title="Editar evento"
+            aria-label="Editar evento"
+            (click)="editEvent()">
+            <i class="pi pi-pencil"></i>
+          </button>
+          <button
+            class="delete-btn"
+            type="button"
+            title="Excluir evento"
+            aria-label="Excluir evento"
+            (click)="deleteEvent()">
+            <i class="pi pi-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

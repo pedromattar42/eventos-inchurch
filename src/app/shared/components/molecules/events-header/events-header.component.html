@@ -1,0 +1,93 @@
+<div class="events-header">
+  <p-toast></p-toast>
+  <div class="header-left">
+    <h1 class="page-title">
+      <i class="pi pi-ticket"></i>
+      {{ title() }}
+      @if (isLoading()) {
+        <p-progressSpinner
+          class="ml-2"
+          [style]="{ width: '20px', height: '20px' }"
+          strokeWidth="4">
+        </p-progressSpinner>
+      }
+    </h1>
+  </div>
+
+  <div class="header-center">
+    <div class="search-container">
+      <div class="search-input-wrapper">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Buscar eventos..."
+          [value]="searchTerm()"
+          (input)="onSearchInput($event)"
+        />
+        <button 
+          class="search-btn"
+          type="button"
+          title="Buscar"
+          aria-label="Buscar eventos">
+          <i class="pi pi-search"></i>
+        </button>
+        
+        @if (searchTerm()) {
+          <button 
+            class="clear-search-btn"
+            type="button"
+            (click)="clearSearch()"
+            title="Limpar busca"
+            aria-label="Limpar busca">
+            <i class="pi pi-times"></i>
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <div class="action-buttons">
+      <button 
+        class="action-btn filter-btn"
+        type="button"
+        (click)="onFilterClick()"
+        title="Filtrar"
+        aria-label="Filtrar eventos">
+        <i class="pi pi-filter"></i>
+      </button>
+
+      <button 
+        class="action-btn export-btn"
+        type="button"
+        (click)="onExportClick()"
+        title="Exportar"
+        aria-label="Exportar eventos">
+        <i class="pi pi-download"></i>
+      </button>
+
+      @if (showViewToggle()) {
+        <button 
+          class="action-btn view-toggle-btn"
+          type="button"
+          (click)="onViewToggleClick()"
+          [title]="isListView() ? 'Ver em cards' : 'Ver em lista'"
+          [attr.aria-label]="isListView() ? 'Ver em cards' : 'Ver em lista'">
+          <i [class]="isListView() ? 'pi pi-th-large' : 'pi pi-list'"></i>
+        </button>
+      }
+
+      @if (showNewButton()) {
+        <button 
+          class="new-event-btn"
+          type="button"
+          (click)="onNewEventClick()"
+          title="Novo Evento"
+          aria-label="Criar novo evento">
+          <i class="pi pi-plus"></i>
+          <span>Novo</span>
+        </button>
+      }
+    </div>
+  </div>
+</div>

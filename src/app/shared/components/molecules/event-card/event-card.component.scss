@@ -10,6 +10,8 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
+  will-change: transform;
+  backface-visibility: hidden;
 
   @media (max-width: 575px) {
     height: 320px;
@@ -165,19 +167,19 @@
   }
 }
 
-// Responsividade
+
 @media (max-width: 768px) {
   .event-card {
     width: 100%;
     max-width: 380px;
-    height: 340px; // Altura ligeiramente menor em mobile
+    height: 340px;
 
     .event-content {
       padding: 16px;
 
       .event-title {
         font-size: 16px;
-        height: 44px; // Altura ajustada para mobile
+        height: 44px;
       }
 
       .event-meta {
@@ -197,14 +199,14 @@
 
 @media (max-width: 480px) {
   .event-card {
-    height: 320px; // Altura ainda menor para telas muito pequenas
+    height: 320px;
 
     .event-image {
-      height: 180px; // Imagem menor
+      height: 180px;
     }
 
     .status-badge {
-      top: 160px; // Ajustar posição do badge
+      top: 160px;
       font-size: 11px;
       padding: 6px 10px;
     }

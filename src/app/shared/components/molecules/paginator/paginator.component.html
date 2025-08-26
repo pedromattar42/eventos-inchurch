@@ -1,0 +1,33 @@
+<div class="custom-paginator">
+  <button
+    class="paginator-btn prev-btn"
+    [disabled]="!canGoPrevious()"
+    (click)="previousPage()"
+    type="button"
+    aria-label="Página anterior">
+    <i class="pi pi-chevron-left"></i>
+  </button>
+
+  @for (page of visiblePages(); track page) {
+    @if (page === '...') {
+      <span class="paginator-ellipsis">...</span>
+    } @else {
+      <button
+        class="paginator-btn page-btn"
+        [class.active]="isCurrentPage(page)"
+        (click)="goToPage($any(page) - 1)"
+        type="button"
+        [attr.aria-label]="'Página ' + page">
+        {{ page }}
+      </button>
+    }
+  }
+  <button
+    class="paginator-btn next-btn"
+    [disabled]="!canGoNext()"
+    (click)="nextPage()"
+    type="button"
+    aria-label="Próxima página">
+    <i class="pi pi-chevron-right"></i>
+  </button>
+</div>
