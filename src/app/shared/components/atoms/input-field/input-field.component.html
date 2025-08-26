@@ -1,0 +1,40 @@
+<div class="form-group">
+  @if (label()) {
+    <label [for]="id()" class="input-label">{{ label() }}</label>
+  }
+  
+  <div [class]="wrapperClasses">
+    @if (hasIcon) {
+      <i [class]="'pi pi-' + icon() + ' input-icon'"></i>
+    }
+    
+    <input
+      [id]="id()"
+      [type]="inputType"
+      [value]="value()"
+      [placeholder]="placeholder()"
+      [disabled]="disabled()"
+      [readonly]="readonly()"
+      [autocomplete]="autocomplete()"
+      [class]="inputClasses"
+      (input)="onInputChange($event)"
+      (focus)="onInputFocus($event)"
+      (blur)="onInputBlur($event)"
+    />
+    
+    @if (hasPasswordToggle) {
+      <button
+        type="button"
+        class="password-toggle"
+        (click)="togglePasswordVisibility()"
+        [attr.aria-label]="showPassword() ? 'Ocultar senha' : 'Mostrar senha'"
+      >
+        <i [class]="showPassword() ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
+      </button>
+    }
+  </div>
+  
+  @if (hasError() && errorMessage()) {
+    <span class="field-error">{{ errorMessage() }}</span>
+  }
+</div>
