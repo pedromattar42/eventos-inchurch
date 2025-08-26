@@ -1,59 +1,185 @@
 # EventosInchurch
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
+Sistema de gerenciamento de eventos desenvolvido em Angular com design responsivo e interface moderna.
 
-## Development server
+## Tecnologias Utilizadas
 
-To start a local development server, run:
+### **Frontend**
+- **Angular 19.2.5** - Framework principal
+- **TypeScript** - Linguagem de programação
+- **PrimeNG** - Biblioteca de componentes UI
+- **PrimeIcons** - Ícones
+- **SCSS** - Pré-processador CSS
+- **Angular Signals** - Gerenciamento de estado reativo
+- **RxJS** - Programação reativa
 
+### **Backend (Simulado)**
+- **JSON Server** - API REST fake para desenvolvimento
+- **db.json** - Banco de dados simulado
+
+### **Ferramentas de Desenvolvimento**
+- **Angular CLI** - Ferramenta de linha de comando
+- **Karma + Jasmine** - Testes unitários
+- **TypeScript Compiler** - Compilação
+- **Angular DevKit** - Ferramentas de build
+
+## Funcionalidades
+
+- **Listagem de Eventos** - Grid responsivo com paginação
+- **Criação de Eventos** - Formulário completo com validação
+- **Edição de Eventos** - Atualização de dados existentes
+- **Exclusão de Eventos** - Modal de confirmação
+- **Busca de Eventos** - Filtro por título em tempo real
+- **Visualização Responsiva** - Cards e lista adaptáveis
+- **Feedback Visual** - Toasts de sucesso/erro
+- **Loading States** - Indicadores de carregamento
+- **Navegação** - Roteamento entre páginas
+
+## Instruções para Execução
+
+### **1. Clone do Repositório**
 ```bash
-ng serve
+git clone <link-do-repositório>
+cd eventos-inchurch
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+### **2. Instalação de Dependências**
 ```bash
-ng generate component component-name
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### **3. Iniciar a API Fake**
+Em um terminal, execute:
+```bash
+npm run server
+```
+O servidor JSON rodará em `http://localhost:3000`.
+
+### **4. Executar a Aplicação**
+Em outro terminal, execute:
+```bash
+npm start
+```
+Acesse a aplicação em `http://localhost:4200`.
+
+## Uso da Aplicação
+
+### **Página Inicial**
+- Visualize todos os eventos em formato de cards ou lista
+- Use a barra de busca para filtrar eventos
+- Navegue entre páginas usando a paginação
+- Clique em "Novo Evento" para criar um evento
+
+### **Criar Evento**
+- Preencha o título (obrigatório)
+- Adicione uma descrição (obrigatório)
+- Insira URL da imagem (opcional)
+- Marque se possui ingressos ativos
+- Clique em "Criar Evento"
+
+### **Editar Evento**
+- Clique no ícone de edição no card do evento
+- Modifique os campos desejados
+- Clique em "Salvar" para confirmar
+
+### **Excluir Evento**
+- Clique no ícone de lixeira no card do evento
+- Confirme a exclusão no modal
+
+## Design System
+
+### **Atomic Design**
+O projeto segue a metodologia Atomic Design:
+- **Atoms**: Componentes básicos (input-field, etc.)
+- **Molecules**: Combinações simples (event-card, paginator)
+- **Organisms**: Componentes complexos (event-form, events-grid)
+
+### **Cores Principais**
+- **Primary**: `#8bc34a` (Verde)
+- **Secondary**: `#6c757d` (Cinza)
+- **Success**: `#28a745` (Verde escuro)
+- **Error**: `#dc3545` (Vermelho)
+
+## Scripts Disponíveis
 
 ```bash
-ng generate --help
+npm start          # Inicia a aplicação (ng serve)
+npm run build      # Build de produção
+npm run server     # Inicia JSON Server
+npm test           # Executa testes unitários
+npm run lint       # Verifica código com ESLint
 ```
 
-## Building
+## Comandos de Desenvolvimento
 
-To build the project run:
-
+### **Gerar Componentes**
 ```bash
-ng build
+ng generate component nome-do-componente
+ng generate service nome-do-servico
+ng generate interface nome-da-interface
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
+### **Build de Produção**
 ```bash
-ng test
+ng build --configuration production
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
+### **Testes**
 ```bash
-ng e2e
+ng test                    # Testes unitários
+ng test --watch=false      # Testes sem watch mode
+ng test --code-coverage    # Testes com cobertura
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## API Endpoints
 
-## Additional Resources
+O JSON Server simula os seguintes endpoints:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```
+GET    /events           # Lista todos os eventos
+GET    /events/:id       # Busca evento por ID
+POST   /events           # Cria novo evento
+PUT    /events/:id       # Atualiza evento
+DELETE /events/:id       # Remove evento
+```
+
+## Responsividade
+
+### **Breakpoints**
+- **Mobile**: `< 576px`
+- **Tablet**: `576px - 768px`
+- **Desktop**: `> 768px`
+
+### **Adaptações**
+- Grid responsivo (1-3 colunas)
+- Navegação mobile-friendly
+- Formulários otimizados para touch
+- Cards adaptáveis
+
+## Deploy
+
+### **Build de Produção**
+```bash
+npm run build
+```
+
+### **Servir Localmente**
+```bash
+npx http-server dist/eventos-inchurch
+```
+
+## Licença
+
+Este projeto foi desenvolvido para fins educacionais e de demonstração.
+
+## Contribuição
+
+1. Fork o projeto
+2. Crie uma branch para sua feature
+3. Commit suas mudanças
+4. Push para a branch
+5. Abra um Pull Request
+
+---
+
+Desenvolvido usando Angular 19

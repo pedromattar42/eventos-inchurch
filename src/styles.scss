@@ -1,1 +1,83 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f8f9fa;
+}
+
+
+.d-none { display: none !important; }
+.d-block { display: block !important; }
+.d-flex { display: flex !important; }
+
+.flex-column { flex-direction: column !important; }
+.flex-row { flex-direction: row !important; }
+.align-items-center { align-items: center !important; }
+.justify-content-center { justify-content: center !important; }
+.justify-content-between { justify-content: space-between !important; }
+.flex-fill { flex: 1 1 auto !important; }
+
+.text-center { text-align: center !important; }
+.mb-3 { margin-bottom: 1rem !important; }
+.me-2 { margin-right: 0.5rem !important; }
+
+
+@media (min-width: 768px) {
+  .d-md-block { display: block !important; }
+  .d-md-none { display: none !important; }
+  .flex-md-row { flex-direction: row !important; }
+  .order-md-1 { order: 1 !important; }
+  .order-md-2 { order: 2 !important; }
+  .mb-md-0 { margin-bottom: 0 !important; }
+}
+
+@media (max-width: 767px) {
+  .d-sm-none { display: none !important; }
+  .order-1 { order: 1 !important; }
+  .order-2 { order: 2 !important; }
+}
+
+app-root {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--p-gray-100);
+}
+
+* {
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+  outline: none;
+}
+
+
+.delete-confirmation-modal {
+  .p-dialog {
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border: none;
+    overflow: hidden;
+  }
+
+  .p-dialog-header {
+    display: none !important;
+  }
+
+  .p-dialog-content {
+    padding: 0 !important;
+    border-radius: 12px;
+  }
+
+  .p-dialog-mask {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+  }
+}
