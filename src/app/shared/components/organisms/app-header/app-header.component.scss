@@ -1,0 +1,213 @@
+.app-header {
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  .header-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .header-left {
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+
+      .logo-icon {
+        width: 24px;
+        height: 24px;
+        background: #8bc34a;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .logo-symbol {
+          color: white;
+          font-weight: 700;
+          font-size: 12px;
+          text-transform: lowercase;
+        }
+      }
+
+      .logo-text {
+        color: #8bc34a;
+        font-weight: 700;
+        font-size: 16px;
+        text-transform: lowercase;
+      }
+
+      .church-info {
+        color: #6c757d;
+        font-size: 12px;
+        font-weight: 400;
+        margin-left: 8px;
+      }
+    }
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 12px;
+      background: white;
+      border-radius: 20px;
+      border: 1px solid #e9ecef;
+
+      .user-avatar {
+        width: 32px;
+        height: 32px;
+        background: #8bc34a;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+
+        i {
+          font-size: 14px;
+        }
+      }
+
+      .user-details {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+
+        .user-name {
+          font-weight: 600;
+          font-size: 13px;
+          color: #2d3748;
+        }
+
+        .user-role {
+          font-size: 11px;
+          color: #6c757d;
+        }
+      }
+    }
+
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: white;
+      border: 1px solid #e9ecef;
+      border-radius: 6px;
+      color: #6c757d;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: #f8f9fa;
+        border-color: #dee2e6;
+        color: #495057;
+      }
+
+      i {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 768px) {
+  .app-header {
+    .header-container {
+      padding: 0 16px;
+      height: 56px;
+    }
+
+    .header-left {
+      .logo {
+        font-size: 16px;
+
+        i {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .header-right {
+      gap: 8px;
+
+      .user-info {
+        padding: 6px 12px;
+
+        .user-avatar {
+          width: 28px;
+          height: 28px;
+
+          i {
+            font-size: 12px;
+          }
+        }
+
+        .user-details {
+          .user-name {
+            font-size: 12px;
+          }
+
+          .user-role {
+            font-size: 10px;
+          }
+        }
+      }
+
+      .logout-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+
+        span {
+          display: none;
+        }
+
+        i {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    .header-container {
+      padding: 0 12px;
+    }
+
+    .header-right {
+      gap: 6px;
+
+      .user-info {
+        .user-details {
+          display: none;
+        }
+      }
+
+      .logout-btn {
+        padding: 6px 8px;
+      }
+    }
+  }
+}

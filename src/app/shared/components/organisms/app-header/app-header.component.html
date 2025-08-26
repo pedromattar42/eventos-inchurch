@@ -1,0 +1,38 @@
+<header class="app-header">
+  <div class="header-container">
+    <div class="header-left">
+      <div class="logo">
+        <div class="logo-icon">
+          <span class="logo-symbol">in</span>
+        </div>
+        <span class="logo-text">church</span>
+        <span class="church-info">ID da Igreja: 1985</span>
+      </div>
+    </div>
+
+    @if (isAuthenticated) {
+      <div class="header-right">
+
+        <div class="user-info">
+          <div class="user-avatar">
+            <i class="pi pi-user"></i>
+          </div>
+          <div class="user-details">
+            <span class="user-name">{{ user?.name }}</span>
+            <span class="user-role">{{ user?.role === 'admin' ? 'Administrador' : 'Usuário' }}</span>
+          </div>
+        </div>
+
+        <button
+          class="logout-btn"
+          (click)="logout()"
+          type="button"
+          title="Sair"
+          aria-label="Fazer logout">
+          <i class="pi pi-sign-out"></i>
+          <span>Sair</span>
+        </button>
+      </div>
+    }
+  </div>
+</header>

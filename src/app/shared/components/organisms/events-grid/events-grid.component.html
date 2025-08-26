@@ -1,0 +1,119 @@
+<div class="events-grid-container">
+  @if (isLoading()) {
+    @if (isListView()) {
+      <div class="skeleton-list">
+        @for (item of [1,2,3,4,5,6,7,8]; track $index) {
+          <div class="skeleton-list-item flex align-items-center gap-3 p-3 border-bottom-1 surface-border">
+            <p-skeleton width="4rem" height="4rem" borderRadius="8px"></p-skeleton>
+            <div class="flex-1">
+              <p-skeleton width="60%" height="1.2rem" class="mb-2"></p-skeleton>
+              <p-skeleton width="80%" height="1rem" class="mb-2"></p-skeleton>
+              <p-skeleton width="40%" height="0.8rem"></p-skeleton>
+            </div>
+            <div class="flex gap-2">
+              <p-skeleton width="2rem" height="2rem" borderRadius="4px"></p-skeleton>
+              <p-skeleton width="2rem" height="2rem" borderRadius="4px"></p-skeleton>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="events-grid" [class.list-view]="isListView()">
+        @for (item of [1,2,3,4,5,6,7,8]; track $index) {
+          <div class="skeleton-card bg-white border-round-lg shadow-2 overflow-hidden">
+            <p-skeleton width="100%" height="12rem"></p-skeleton>
+            <div class="p-3">
+              <p-skeleton width="80%" height="1.2rem" class="mb-2"></p-skeleton>
+              <p-skeleton width="100%" height="1rem" class="mb-3"></p-skeleton>
+              <div class="flex justify-content-between align-items-center">
+                <p-skeleton width="60%" height="0.8rem"></p-skeleton>
+                <p-skeleton width="2rem" height="1.5rem" borderRadius="12px"></p-skeleton>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  } @else if (isEmptyList()) {
+    <div class="no-events-message">
+      <div class="no-events-icon">
+        <i class="pi pi-calendar-times"></i>
+      </div>
+      <h3 class="no-events-title">Nenhum evento criado</h3>
+      <p class="no-events-description">
+        Você ainda não criou nenhum evento. Que tal começar criando o primeiro?
+      </p>
+      <button
+        class="create-event-btn"
+        type="button"
+        (click)="handleCreateEvent()"
+        title="Criar seu primeiro evento"
+        aria-label="Criar seu primeiro evento">
+        <i class="pi pi-plus"></i>
+        <span>Criar Primeiro Evento</span>
+      </button>
+    </div>
+  } @else if (isSearchWithNoResults()) {
+    <div class="no-events-message">
+      <div class="no-events-icon search-icon">
+        <i class="pi pi-search"></i>
+      </div>
+      <h3 class="no-events-title">Nenhum resultado encontrado</h3>
+      <p class="no-events-description">
+        Não encontramos eventos que correspondam à sua busca por "<strong>{{ searchTerm() }}</strong>".
+        Tente usar outros termos ou criar um novo evento.
+      </p>
+      <button
+        class="create-event-btn secondary"
+        type="button"
+        (click)="handleCreateEvent()"
+        title="Criar novo evento"
+        aria-label="Criar novo evento">
+        <i class="pi pi-plus"></i>
+        <span>Criar Novo Evento</span>
+      </button>
+    </div>
+  } @else {
+    @if (isListView()) {
+      <app-events-list
+        [events]="currentPageEvents()"
+        (onEdit)="handleEditEvent($event)"
+        (onDelete)="handleDeleteEvent($event)" />
+    } @else {
+      <div class="events-grid" [class.list-view]="isListView()">
+        @for (event of currentPageEvents(); track event.id) {
+          <app-event-card
+            [event]="event"
+            (onEdit)="handleEditEvent($event)"
+            (onDelete)="handleDeleteEvent($event)" />
+        }
+      </div>
+    }
+  }
+
+  <div class="grid-footer d-flex flex-column flex-md-row align-items-center justify-content-center">
+    @if (events().length > 0) {
+      <div class="paginator-container flex-fill d-flex justify-content-center order-2 order-md-1">
+        <app-paginator
+          [totalRecords]="totalRecords()"
+          [rows]="rows()"
+          [first]="first()"
+          (onPageChange)="onPageChange.emit($event)" />
+      </div>
+    }
+
+    @if (showListToggle()) {
+      <div class="view-toggle order-1 order-md-2 mb-3 mb-md-0">
+        <button
+          class="toggle-btn d-flex align-items-center"
+          (click)="onToggleView.emit()"
+          type="button"
+          [title]="isListView() ? 'Ver tabela em cards' : 'Ver em lista'"
+          [attr.aria-label]="isListView() ? 'Ver tabela em cards' : 'Ver em lista'">
+          <i [class]="isListView() ? 'pi pi-th-large' : 'pi pi-list'" class="me-2"></i>
+          <span class="d-none d-sm-inline">{{ isListView() ? 'Ver tabela em cards' : 'Ver tabela em lista' }}</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

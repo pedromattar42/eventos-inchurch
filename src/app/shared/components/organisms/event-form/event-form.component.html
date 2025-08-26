@@ -1,0 +1,95 @@
+<div class="event-form-container">
+  <p-toast></p-toast>
+  <div class="form-header">
+    <h2 class="form-title">{{ title() }}</h2>
+    <p class="form-subtitle">
+      {{ isEditMode ? 'Edite as informações do evento' : 'Preencha as informações do novo evento' }}
+    </p>
+  </div>
+
+  <form [formGroup]="eventForm" (ngSubmit)="onFormSubmit()" class="event-form">
+    @if (errorMessage()) {
+      <div class="error-message">
+        <i class="pi pi-exclamation-triangle"></i>
+        <span>{{ errorMessage() }}</span>
+      </div>
+    }
+
+    <div class="form-row">
+      <app-input-field
+        id="title"
+        label="Título do Evento"
+        type="text"
+        icon="calendar"
+        placeholder="Digite o título do evento"
+        formControlName="title"
+        [hasError]="!!getFieldError('title')"
+        [errorMessage]="getFieldError('title')"
+      />
+    </div>
+
+    <div class="form-row">
+      <app-input-field
+        id="description"
+        label="Descrição"
+        type="text"
+        icon="align-left"
+        placeholder="Digite uma descrição para o evento"
+        formControlName="description"
+        [hasError]="!!getFieldError('description')"
+        [errorMessage]="getFieldError('description')"
+      />
+    </div>
+
+    <div class="form-row">
+      <app-input-field
+        id="imageUrl"
+        label="URL da Imagem (opcional)"
+        type="url"
+        icon="image"
+        placeholder="https://exemplo.com/imagem.jpg"
+        formControlName="imageUrl"
+        [hasError]="!!getFieldError('imageUrl')"
+        [errorMessage]="getFieldError('imageUrl')"
+      />
+    </div>
+
+    <div class="form-row checkbox-row">
+      <div class="checkbox-wrapper">
+        <input
+          id="hasActiveTickets"
+          type="checkbox"
+          formControlName="hasActiveTickets"
+          class="checkbox-input"
+        />
+        <label for="hasActiveTickets" class="checkbox-label">
+          <i class="pi pi-check checkbox-icon"></i>
+          <span>Evento possui ingressos ativos</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <p-button
+        type="button"
+        label="Cancelar"
+        icon="pi pi-times"
+        severity="secondary"
+        [disabled]="isLoading()"
+        (onClick)="onCancelClick()"
+        title="Cancelar"
+        class="cancel-button">
+      </p-button>
+
+      <p-button
+        type="submit"
+        [label]="isLoading() ? 'Salvando...' : submitButtonText()"
+        [icon]="isLoading() ? 'pi pi-spin pi-spinner' : 'pi pi-check'"
+        [loading]="isLoading()"
+        [disabled]="isLoading()"
+        title="Salvar"
+        class="submit-button">
+      </p-button>
+    </div>
+  </form>
+</div>
