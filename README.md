@@ -76,6 +76,9 @@ npm start
 Acesse a aplicação em `http://localhost:4200`.
 
 ## Uso da Aplicação
+- Credenciais:
+- Email: admin@example.com ou user@example.com
+- Senha: 123456
 
 ### **Página Inicial**
 - Visualize todos os eventos em formato de cards ou lista
