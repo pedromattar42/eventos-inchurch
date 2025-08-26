@@ -23,6 +23,19 @@ Sistema de gerenciamento de eventos desenvolvido em Angular com design responsiv
 - **TypeScript Compiler** - Compilação
 - **Angular DevKit** - Ferramentas de build
 
+## Pré-requisitos
+
+Antes de executar o projeto, certifique-se de ter instalado:
+
+- **Node.js** - Versão 18.19.0 ou superior
+- **npm** - Versão 9.0.0 ou superior (incluído com Node.js)
+
+Para verificar as versões instaladas:
+```bash
+node --version
+npm --version
+```
+
 ## Funcionalidades
 
 - **Listagem de Eventos** - Grid responsivo com paginação
