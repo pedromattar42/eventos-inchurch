@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventFormComponent, EventFormData } from '../../shared/components/organisms/event-form/event-form.component';
@@ -13,6 +13,8 @@ import { EventData } from '../../shared/components/molecules/event-card/event-ca
   styleUrl: './edit-event.component.scss'
 })
 export class EditEventComponent implements OnInit {
+  @ViewChild(EventFormComponent) eventForm!: EventFormComponent;
+
   eventToEdit = signal<EventData | null>(null);
   eventNotFound = signal<boolean>(false);
 
@@ -33,13 +35,11 @@ export class EditEventComponent implements OnInit {
   }
 
   private loadEvent(eventId: string): void {
-    // Primeiro tenta buscar no storage (mais rápido)
     const eventFromStorage = this.eventsStorage.getEventById(eventId);
     
     if (eventFromStorage) {
       this.eventToEdit.set(eventFromStorage);
     } else {
-      // Se não encontrar no storage, busca na API
       this.eventsStorage.setLoading(true);
       
       this.eventsApiService.getEvents().subscribe({
@@ -49,7 +49,6 @@ export class EditEventComponent implements OnInit {
           );
           if (event) {
             this.eventToEdit.set(event);
-            // Atualiza o storage com todos os eventos
             this.eventsStorage.setEvents(events);
           } else {
             this.eventNotFound.set(true);
@@ -83,15 +82,21 @@ export class EditEventComponent implements OnInit {
       hasActiveTickets: formData.hasActiveTickets
     }).subscribe({
       next: (updatedEvent) => {
-        console.log('Evento atualizado com sucesso:', updatedEvent);
-        // Atualiza o evento no storage
+        // Atualiza o storage primeiro (sem loading para evitar tremida)
         this.eventsStorage.updateEvent(updatedEvent);
-        this.eventsStorage.setLoading(false);
-        this.router.navigate(['/']);
+
+        // Mostra o toast
+        this.eventForm.showSuccess('Evento atualizado com sucesso!');
+
+        // Navega após um delay menor
+        setTimeout(() => {
+          this.eventsStorage.setLoading(false);
+          this.router.navigate(['/']);
+        }, 1200);
       },
-      error: (error) => {
-        console.error('Erro ao atualizar evento:', error);
+      error: () => {
         this.eventsStorage.setLoading(false);
+        this.eventForm.showError('Erro ao atualizar evento. Tente novamente.');
       }
     });
   }

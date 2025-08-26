@@ -1,0 +1,9 @@
+<div class="create-event-container">
+  <app-event-form
+    title="Criar Novo Evento"
+    submitButtonText="Criar Evento"
+    [isLoading]="isLoading()"
+    (onSubmit)="onSubmit($event)"
+    (onCancel)="onCancel()"
+  />
+</div>

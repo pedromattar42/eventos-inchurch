@@ -1,0 +1,20 @@
+.create-event-container {
+  min-height: calc(100vh - 80px);
+  padding: 32px 20px;
+  background: #f8f9fa;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .create-event-container {
+    padding: 20px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .create-event-container {
+    padding: 16px 12px;
+  }
+}

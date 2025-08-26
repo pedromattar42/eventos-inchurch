@@ -1,0 +1,40 @@
+<div class="home-container">
+  <app-events-header
+    title="Eventos"
+    [isListView]="isListView()"
+    [showNewButton]="true"
+    [showViewToggle]="true"
+    [searchTerm]="searchTerm()"
+    (onSearch)="onSearch($event)"
+    (onFilter)="onFilter()"
+    (onExport)="onExport()"
+    (onToggleView)="onToggleView()"
+    (onNewEvent)="onNewEvent()"
+  />
+
+  <app-events-grid
+    [events]="events()"
+    [totalRecords]="totalRecords()"
+    [rows]="rows()"
+    [first]="first()"
+    [isListView]="isListView()"
+    [searchTerm]="searchTerm()"
+    [showListToggle]="false"
+    [isLoading]="isLoading()"
+    (onPageChange)="onPageChange($event)"
+    (onToggleView)="onToggleView()"
+    (onEditEvent)="onEditEvent($event)"
+    (onDeleteEvent)="onDeleteEvent($event)"
+    (onCreateEvent)="onNewEvent()" />
+
+  <app-confirmation-modal
+    [isVisible]="showDeleteModal()"
+    [event]="eventToDelete()"
+    title="Confirmar Exclusão"
+    message="Tem certeza que deseja excluir o evento?"
+    confirmText="Excluir Evento"
+    cancelText="Cancelar"
+    (onConfirm)="onConfirmDelete()"
+    (onCancel)="onCancelDelete()"
+  />
+</div>

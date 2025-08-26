@@ -1,0 +1,32 @@
+<div class="edit-event-container">
+  @if (eventNotFound()) {
+    <div class="event-not-found">
+      <div class="not-found-content">
+        <i class="pi pi-exclamation-triangle"></i>
+        <h2>Evento não encontrado</h2>
+        <p>O evento que você está tentando editar não foi encontrado.</p>
+        <button 
+          class="back-button"
+          type="button"
+          (click)="onCancel()">
+          <i class="pi pi-arrow-left"></i>
+          <span>Voltar</span>
+        </button>
+      </div>
+    </div>
+  } @else if (eventToEdit()) {
+    <app-event-form
+      title="Editar Evento"
+      submitButtonText="Salvar Alterações"
+      [event]="eventToEdit()"
+      [isLoading]="isLoading()"
+      (onSubmit)="onSubmit($event)"
+      (onCancel)="onCancel()"
+    />
+  } @else {
+    <div class="loading-container">
+      <i class="pi pi-spin pi-spinner"></i>
+      <span>Carregando evento...</span>
+    </div>
+  }
+</div>

@@ -1,0 +1,62 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="logo">
+        <div class="logo-icon">
+          <span class="logo-symbol">in</span>
+        </div>
+        <span class="logo-text">church</span>
+      </div>
+      <h1>Eventos</h1>
+      <p>Faça login para gerenciar seus eventos</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      @if (errorMessage()) {
+        <div class="error-message">
+          <i class="pi pi-exclamation-triangle"></i>
+          <span>{{ errorMessage() }}</span>
+        </div>
+      }
+
+      <app-input-field
+        id="email"
+        label="E-mail"
+        type="email"
+        icon="envelope"
+        placeholder="Digite seu e-mail"
+        autocomplete="email"
+        formControlName="email"
+        [hasError]="!!getFieldError('email')"
+        [errorMessage]="getFieldError('email') || ''"
+      />
+
+      <app-input-field
+        id="password"
+        label="Senha"
+        type="password"
+        icon="lock"
+        placeholder="Digite sua senha"
+        autocomplete="current-password"
+        formControlName="password"
+        [showPasswordToggle]="true"
+        [hasError]="!!getFieldError('password')"
+        [errorMessage]="getFieldError('password') || ''"
+      />
+
+      <button
+        type="submit"
+        class="login-button"
+        [disabled]="isLoading"
+        [class.loading]="isLoading">
+        @if (isLoading) {
+          <i class="pi pi-spin pi-spinner"></i>
+          <span>Entrando...</span>
+        } @else {
+          <i class="pi pi-sign-in"></i>
+          <span>Entrar</span>
+        }
+      </button>
+    </form>
+  </div>
+</div>
